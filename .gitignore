@@ -14,4 +14,5 @@ Thumbs.db
 # Scratch data the plugin may write at runtime
 shoes.json
 deals.json
+shoe-comparison.html
 *.tmp

@@ -21,11 +21,16 @@ Follow the full workflow defined in the `shoe-comparison` skill. In brief:
    python "${CLAUDE_PLUGIN_ROOT}/scripts/scrape.py" --output shoes.json <URL1> <URL2> <URL3> ...
    ```
 
-4. **Filter & rank.** Apply hard filters and weight the criteria:
+4. **Filter & rank.** Apply hard filters and weight the criteria (add `--chart` for an inline ASCII bar chart):
    ```bash
    python "${CLAUDE_PLUGIN_ROOT}/scripts/rank.py" --input shoes.json \
      --max-price <N> --min-rating <N> --brand <brand1,brand2> \
-     --weights price=0.4,rating=0.35,reviews=0.25
+     --weights price=0.4,rating=0.35,reviews=0.25 --chart
+   ```
+   For a shareable visual, pipe the ranked JSON into the HTML chart generator:
+   ```bash
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/rank.py" --input shoes.json --json --weights price=0.4,rating=0.35,reviews=0.25 \
+     | python "${CLAUDE_PLUGIN_ROOT}/scripts/chart.py" --title "<your query>" --open
    ```
 
 5. **Present.** A comparison table (model · price & retailer · rating/reviews · fit notes · key specs · best-for), then a **top recommendation** with reasoning, plus a **budget pick** and a **premium pick**.

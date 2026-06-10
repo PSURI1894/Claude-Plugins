@@ -86,8 +86,10 @@ Run the ranking engine with the user's hard filters and priority weights:
 ```bash
 python "${CLAUDE_PLUGIN_ROOT}/scripts/rank.py" --input shoes.json \
   --max-price 130 --min-rating 4.2 --brand brooks,asics,hoka --in-stock \
-  --weights price=0.4,rating=0.35,reviews=0.25
+  --weights price=0.4,rating=0.35,reviews=0.25 --chart
 ```
+
+`--chart` appends an ASCII score bar chart under the table — a fast visual read of how the candidates stack up.
 
 How scoring works (all normalized **within the candidate set**, 0–100 final):
 - **price** — lower is better (min-max inverted).
@@ -120,6 +122,16 @@ Lead with a compact table, then narrative picks.
 - ⚠️ **Caveats** — price/stock volatility, thin review counts, fit warnings ("runs ~½ size small"), colorway price gaps.
 
 **Every** price must carry its retailer + clickable URL and a "as of now — verify at checkout" note.
+
+### Visual chart (optional but encouraged)
+Offer a chart comparison — two zero-dependency ways:
+- **Inline ASCII** — add `--chart` to `rank.py` (above) for score bars right in the terminal.
+- **Shareable HTML** — pipe the ranked JSON into `chart.py` for a polished, self-contained page (bar length = score, bar color = rating, every shoe linked):
+  ```bash
+  python "${CLAUDE_PLUGIN_ROOT}/scripts/rank.py" --input shoes.json --json --weights price=0.4,rating=0.35,reviews=0.25 \
+    | python "${CLAUDE_PLUGIN_ROOT}/scripts/chart.py" --title "Trail runners under $130" --open
+  ```
+  `--open` launches it in the browser; omit it to just write the file and print the path.
 
 ---
 

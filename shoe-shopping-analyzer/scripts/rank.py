@@ -120,6 +120,27 @@ def fmt_table(ranked):
     return "\n".join(lines)
 
 
+def fmt_chart(ranked, width=34):
+    """ASCII horizontal bar chart of scores - zero-dependency, terminal-friendly."""
+    if not ranked:
+        return "No products to chart."
+    bar_char = "█"  # full block, falls back to '#' if the console can't encode it
+    try:
+        bar_char.encode(sys.stdout.encoding or "utf-8")
+    except (UnicodeEncodeError, LookupError, TypeError):
+        bar_char = "#"
+    top = max((p["_score"] for p in ranked), default=1) or 1
+    lines = ["", "SCORE COMPARISON  (bar length proportional to score)", ""]
+    for i, p in enumerate(ranked, 1):
+        filled = max(1, round(width * p["_score"] / top))
+        bar = bar_char * filled + " " * (width - filled)
+        price = f"${p['price']:.0f}" if p.get("price") is not None else "-"
+        rating = f"{p['rating']:.1f}*" if p.get("rating") is not None else "-"
+        name = (p.get("title") or "-")[:34]
+        lines.append(f"{i:>2}. {name:<34} |{bar}| {p['_score']:>5}  {price:>6}  {rating:>5}")
+    return "\n".join(lines)
+
+
 def main():
     ap = argparse.ArgumentParser(description="Filter and rank normalized shoe products.")
     ap.add_argument("--input", help="products JSON file (default: read stdin)")
@@ -132,6 +153,7 @@ def main():
     ap.add_argument("--weights", help="e.g. price=0.4,rating=0.4,reviews=0.2 (auto-normalized)")
     ap.add_argument("--top", type=int, default=0, help="limit output to the top N")
     ap.add_argument("--json", action="store_true", help="emit ranked JSON instead of a table")
+    ap.add_argument("--chart", action="store_true", help="also print an ASCII score bar chart")
     args = ap.parse_args()
 
     products = load(args)
@@ -145,11 +167,12 @@ def main():
 
     if args.json:
         print(json.dumps(ranked, indent=2, ensure_ascii=False))
+    elif ranked:
+        print(fmt_table(ranked))
+        if args.chart:
+            print(fmt_chart(ranked))
     else:
-        if ranked:
-            print(fmt_table(ranked))
-        else:
-            print("No products passed the filters.")
+        print("No products passed the filters.")
     print(
         f"\n# {len(ranked)} of {len(products)} products passed filters | weights: {weights}",
         file=sys.stderr,

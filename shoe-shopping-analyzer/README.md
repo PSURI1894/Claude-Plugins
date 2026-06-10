@@ -12,7 +12,8 @@ reviews. It combines live web research, structured scraping, and a weighted scor
 | Command | `/shoe-deals <model>` | Best current price for one specific model across every retailer. |
 | Skill | `shoe-comparison` | Auto-triggers in normal conversation about buying/comparing shoes; holds the full methodology. |
 | Script | `scripts/scrape.py` | Extracts normalized product data (price, rating, reviews, stock) from any retailer URL via JSON-LD / meta / HTML. |
-| Script | `scripts/rank.py` | Applies hard filters and a weighted 0–100 score, prints a ranked table. |
+| Script | `scripts/rank.py` | Applies hard filters and a weighted 0–100 score; prints a ranked table (add `--chart` for an inline ASCII bar chart). |
+| Script | `scripts/chart.py` | Renders a self-contained **HTML** comparison chart — bar length = score, color = rating, each shoe linked. Zero dependencies. |
 
 ## Install
 
@@ -43,7 +44,7 @@ Or just talk naturally — "help me find good wide-fit road running shoes under 
 2. **Discover** — WebSearch casts a wide net across brand stores, marketplaces, specialists, outlets, and resale sites to collect candidate product URLs.
 3. **Extract** — `scrape.py` reads each page's schema.org JSON-LD (then OpenGraph/meta, then HTML) into normalized records; WebFetch fills in fit notes and review themes.
 4. **Rank** — `rank.py` drops anything failing your hard limits, then scores survivors on price (lower better), rating, and review-count confidence (log-scaled), using weights set from your stated priorities.
-5. **Present** — a comparison table plus a top pick, budget pick, and premium pick, every price linked and timestamped "verify at checkout".
+5. **Present** — a comparison table plus a top pick, budget pick, and premium pick, every price linked and timestamped "verify at checkout". Optionally a **visual chart** — an inline ASCII bar chart (`rank.py --chart`) or a shareable HTML page (`chart.py`).
 
 ### Using the scripts directly
 
@@ -52,10 +53,15 @@ Or just talk naturally — "help me find good wide-fit road running shoes under 
 python scripts/scrape.py --output shoes.json \
   "https://www.zappos.com/p/..." "https://www.brooksrunning.com/..." "https://www.amazon.com/dp/..."
 
-# 2. Filter + rank with your priorities
+# 2. Filter + rank with your priorities (add --chart for an inline ASCII chart)
 python scripts/rank.py --input shoes.json \
   --max-price 130 --min-rating 4.2 --brand brooks,asics,hoka --in-stock \
-  --weights price=0.4,rating=0.35,reviews=0.25
+  --weights price=0.4,rating=0.35,reviews=0.25 --chart
+
+# 3. Render a shareable HTML comparison chart (bar = score, color = rating; opens in browser)
+python scripts/rank.py --input shoes.json --json \
+  --weights price=0.4,rating=0.35,reviews=0.25 \
+  | python scripts/chart.py --title "Trail runners under 130 USD" --open
 ```
 
 ## Notes & limits
