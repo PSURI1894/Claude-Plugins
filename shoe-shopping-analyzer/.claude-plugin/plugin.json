@@ -1,0 +1,22 @@
+{
+  "name": "shoe-shopping-analyzer",
+  "version": "1.0.0",
+  "description": "Compare shoes across every available online retailer with deep filters — price & deals, brand/model, size/fit/width, activity, performance specs, and reviews. Uses live web research and structured scraping, then ranks candidates with a weighted scoring engine.",
+  "author": {
+    "name": "Parth Suri",
+    "email": "parthsuri009@gmail.com",
+    "url": "https://github.com/PSURI1894"
+  },
+  "homepage": "https://github.com/PSURI1894",
+  "license": "MIT",
+  "keywords": [
+    "shopping",
+    "shoes",
+    "sneakers",
+    "running-shoes",
+    "comparison",
+    "deals",
+    "price-comparison",
+    "scraping"
+  ]
+}

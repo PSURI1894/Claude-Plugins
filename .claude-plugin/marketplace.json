@@ -1,0 +1,25 @@
+{
+  "name": "parth-claude-plugins",
+  "owner": {
+    "name": "Parth Suri",
+    "email": "parthsuri009@gmail.com",
+    "url": "https://github.com/PSURI1894"
+  },
+  "metadata": {
+    "description": "Parth Suri's collection of Claude Code plugins.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "shoe-shopping-analyzer",
+      "source": "./shoe-shopping-analyzer",
+      "description": "Compare shoes across every available shopping site with deep filtering on price, fit, size/width, activity, performance specs, and reviews. Live web research + structured scraping + weighted ranking.",
+      "version": "1.0.0",
+      "author": { "name": "Parth Suri" },
+      "homepage": "https://github.com/PSURI1894",
+      "license": "MIT",
+      "keywords": ["shopping", "shoes", "sneakers", "comparison", "deals", "price-comparison", "scraping", "web-research"],
+      "category": "productivity"
+    }
+  ]
+}
