@@ -11,8 +11,11 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Scratch data the plugin may write at runtime
+# Scratch data the plugins may write at runtime
 shoes.json
 deals.json
 shoe-comparison.html
+zone.json
+pgs.json
+pg-map.html
 *.tmp

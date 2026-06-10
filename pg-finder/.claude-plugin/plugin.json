@@ -1,0 +1,24 @@
+{
+  "name": "pg-finder",
+  "version": "1.0.0",
+  "description": "Find and rank PG (paying guest) accommodation in any city — a maps-based 5 km search around your office/college (or the clustered midpoint for a group of 2-3), with gender, budget, AC/non-AC, sharing, food, and amenity filters. Free OpenStreetMap geocoding, live listing research, weighted ranking, and an interactive HTML map.",
+  "author": {
+    "name": "Parth Suri",
+    "email": "parthsuri009@gmail.com",
+    "url": "https://github.com/PSURI1894"
+  },
+  "homepage": "https://github.com/PSURI1894",
+  "license": "MIT",
+  "keywords": [
+    "pg",
+    "paying-guest",
+    "accommodation",
+    "housing",
+    "hostel",
+    "co-living",
+    "india",
+    "maps",
+    "geocoding",
+    "relocation"
+  ]
+}

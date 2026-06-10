@@ -1,0 +1,34 @@
+{
+  "radius_km": 5.0,
+  "anchors": [
+    {
+      "label": "Rahul",
+      "query": "Demo Office, Marathahalli, Bengaluru",
+      "lat": 12.9569,
+      "lon": 77.7011,
+      "display_name": "Marathahalli, Bengaluru, Karnataka, India (synthetic demo anchor)",
+      "centroid_km": 4.32
+    },
+    {
+      "label": "Priya",
+      "query": "Demo College, Koramangala, Bengaluru",
+      "lat": 12.9352,
+      "lon": 77.6245,
+      "display_name": "Koramangala, Bengaluru, Karnataka, India (synthetic demo anchor)",
+      "centroid_km": 4.32
+    }
+  ],
+  "centroid": { "lat": 12.94605, "lon": 77.6628 },
+  "pairwise_km": [{ "a": "Rahul", "b": "Priya", "km": 8.64 }],
+  "guaranteed_radius_km": 0.68,
+  "all_reachable": true,
+  "map_links": {
+    "openstreetmap": "https://www.openstreetmap.org/?mlat=12.94605&mlon=77.66280#map=13/12.94605/77.66280",
+    "google_maps_pg_search": "https://www.google.com/maps/search/pg+paying+guest/@12.94605,77.66280,13z"
+  },
+  "notes": [
+    "Group search: the 5 km circle is centred on the group midpoint; check each member's distance per listing.",
+    "Any PG within 0.68 km of the midpoint is automatically within 5 km of every member.",
+    "SYNTHETIC DEMO FIXTURE - regenerate with `geo.py zone` for real searches."
+  ]
+}
