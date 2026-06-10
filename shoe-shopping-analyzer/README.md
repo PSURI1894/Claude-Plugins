@@ -8,8 +8,8 @@ reviews. It combines live web research, structured scraping, and a weighted scor
 
 | Component | Name | Purpose |
 |---|---|---|
-| Command | `/compare-shoes <brief>` | Full comparison: discover candidates across all sites, filter, rank, recommend. |
-| Command | `/shoe-deals <model>` | Best current price for one specific model across every retailer. |
+| Command | `/shoe-shopping-analyzer:compare-shoes <brief>` | Full comparison: discover candidates across all sites, filter, rank, recommend. |
+| Command | `/shoe-shopping-analyzer:shoe-deals <model>` | Best current price for one specific model across every retailer. |
 | Skill | `shoe-comparison` | Auto-triggers in normal conversation about buying/comparing shoes; holds the full methodology. |
 | Script | `scripts/scrape.py` | Extracts normalized product data (price, rating, reviews, stock) from any retailer URL via JSON-LD / meta / HTML. |
 | Script | `scripts/rank.py` | Applies hard filters and a weighted 0–100 score; prints a ranked table (add `--chart` for an inline ASCII bar chart). |
@@ -31,9 +31,11 @@ pip install -r "<plugin-path>/scripts/requirements.txt"
 ## Usage
 
 ```
-/compare-shoes men's trail running shoes under $130, wide (2E), size 11, great cushioning
-/shoe-deals Brooks Ghost 16 men's size 11
+/shoe-shopping-analyzer:compare-shoes men's trail running shoes under $130, wide (2E), size 11, great cushioning
+/shoe-shopping-analyzer:shoe-deals Brooks Ghost 16 men's size 11
 ```
+
+Plugin commands are namespaced — type `/shoe-shopping-analyzer` and tab-complete.
 
 Or just talk naturally — "help me find good wide-fit road running shoes under $120" — and the
 `shoe-comparison` skill activates on its own.

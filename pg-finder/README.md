@@ -17,8 +17,8 @@ output as an interactive Leaflet map.
 
 | Component | Name | Purpose |
 |---|---|---|
-| Command | `/find-pg <brief>` | Full search: zone → discover listings → extract → filter → rank → map. |
-| Command | `/pg-zone <anchors>` | Just the geometry: geocode 1–3 anchors, cluster, map the 5 km zone, name target localities. |
+| Command | `/pg-finder:find-pg <brief>` | Full search: zone → discover listings → extract → filter → rank → map. |
+| Command | `/pg-finder:pg-zone <anchors>` | Just the geometry: geocode 1–3 anchors, cluster, map the 5 km zone, name target localities. |
 | Skill | `pg-search` | Auto-triggers in normal conversation about finding PGs; holds the full methodology. |
 | Script | `scripts/geo.py` | `zone`: geocode anchors + centroid + search circle + map links. `fill`: batch-geocode listing addresses. Zero dependencies. |
 | Script | `scripts/rank.py` | Hard filters (gender, rent, AC, sharing, food, amenities, distance) + weighted 0–100 score; ranked table, `--chart` for ASCII bars, `--json` for piping. |
@@ -37,10 +37,14 @@ No Python dependencies — the scripts are pure standard library.
 ## Usage
 
 ```
-/find-pg 2 girls, PG near Christ University Bengaluru, budget ₹12k each, AC, veg food
-/find-pg single sharing PG for a working professional near Hinjewadi Phase 2 Pune, non-AC ok, under ₹10k
-/pg-zone Embassy Tech Village Bengaluru; Christ University Bengaluru
+/pg-finder:find-pg 2 girls, PG near Christ University Bengaluru, budget ₹12k each, AC, veg food
+/pg-finder:find-pg single sharing PG for a working professional near Hinjewadi Phase 2 Pune, non-AC ok, under ₹10k
+/pg-finder:pg-zone Embassy Tech Village Bengaluru; Christ University Bengaluru
 ```
+
+Plugin commands are namespaced — type `/pg-finder` and tab-complete. Be specific with
+anchor locations ("Thomson Reuters, EPIP Zone Whitefield" beats "Thomson Reuters Bangalore",
+which can resolve to the wrong campus).
 
 Or just talk naturally — "we're 3 friends moving to Hyderabad, need a boys PG near
 Hitec City under 9k" — and the `pg-search` skill activates on its own.
