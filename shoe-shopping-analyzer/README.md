@@ -16,10 +16,8 @@ reviews. It combines live web research, structured scraping, and a weighted scor
 
 ## Install
 
-From the marketplace root (`Claude-Plugins/`):
-
 ```
-/plugin marketplace add C:\Users\parth\Claude-Plugins
+/plugin marketplace add PSURI1894/Claude-Plugins
 /plugin install shoe-shopping-analyzer@parth-claude-plugins
 ```
 

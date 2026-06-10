@@ -5,10 +5,10 @@ A personal [Claude Code](https://claude.com/claude-code) plugin marketplace.
 ## Add this marketplace
 
 ```
-/plugin marketplace add C:\Users\parth\Claude-Plugins
+/plugin marketplace add PSURI1894/Claude-Plugins
 ```
 
-(Or, once pushed to GitHub: `/plugin marketplace add PSURI1894/Claude-Plugins`.)
+(Or from a local clone: `/plugin marketplace add C:\Users\parth\Claude-Plugins`.)
 
 ## Plugins
 
