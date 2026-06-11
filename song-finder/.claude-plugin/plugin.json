@@ -1,0 +1,24 @@
+{
+  "name": "song-finder",
+  "version": "1.0.0",
+  "description": "Find songs and build playlists from singers (primary), mood, language, genre, and era — plus similar-artist discoveries matched to your taste. Every track verified against the key-less iTunes catalog (real metadata + 30-sec previews); similar artists from MusicBrainz + ListenBrainz listener data; output as an interactive HTML playlist with YouTube/Spotify/JioSaavn links.",
+  "author": {
+    "name": "Parth Suri",
+    "email": "parthsuri009@gmail.com",
+    "url": "https://github.com/PSURI1894"
+  },
+  "homepage": "https://github.com/PSURI1894",
+  "license": "MIT",
+  "keywords": [
+    "music",
+    "songs",
+    "playlist",
+    "recommendations",
+    "mood",
+    "artists",
+    "discovery",
+    "bollywood",
+    "itunes",
+    "listenbrainz"
+  ]
+}

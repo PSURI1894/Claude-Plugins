@@ -31,6 +31,17 @@
       "license": "MIT",
       "keywords": ["pg", "paying-guest", "accommodation", "housing", "hostel", "co-living", "india", "maps", "geocoding", "relocation"],
       "category": "productivity"
+    },
+    {
+      "name": "song-finder",
+      "source": "./song-finder",
+      "description": "Find songs and build playlists from singers (primary), mood, language, genre, and era — plus similar-artist discoveries matched to your taste. Every track verified against the key-less iTunes catalog (real metadata + 30-sec previews); similar artists from MusicBrainz + ListenBrainz listener data; output as an interactive HTML playlist with YouTube/Spotify/JioSaavn links.",
+      "version": "1.0.0",
+      "author": { "name": "Parth Suri" },
+      "homepage": "https://github.com/PSURI1894",
+      "license": "MIT",
+      "keywords": ["music", "songs", "playlist", "recommendations", "mood", "artists", "discovery", "bollywood", "itunes", "listenbrainz"],
+      "category": "entertainment"
     }
   ]
 }
