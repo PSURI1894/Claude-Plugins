@@ -13,7 +13,9 @@
     "country_store": "IN",
     "source": "itunes",
     "section": "From your singers",
-    "note": "Slow-burn romantic - exactly the mellow Arijit register you asked for."
+    "note": "Slow-burn romantic - exactly the mellow Arijit register you asked for.",
+    "youtube_id": "UEvOsQBu1jY",
+    "youtube_url": "https://www.youtube.com/watch?v=UEvOsQBu1jY"
   },
   {
     "title": "Dhun",
@@ -29,7 +31,9 @@
     "country_store": "IN",
     "source": "itunes",
     "section": "From your singers",
-    "note": null
+    "note": null,
+    "youtube_id": "cUmUOb7j3dc",
+    "youtube_url": "https://www.youtube.com/watch?v=cUmUOb7j3dc"
   },
   {
     "title": "Hawayein",
@@ -45,7 +49,9 @@
     "country_store": "IN",
     "source": "itunes",
     "section": "From your singers",
-    "note": null
+    "note": null,
+    "youtube_id": "cYOB941gyXI",
+    "youtube_url": "https://www.youtube.com/watch?v=cYOB941gyXI"
   },
   {
     "title": "Tere Liye",
@@ -61,7 +67,9 @@
     "country_store": "IN",
     "source": "itunes",
     "section": "You might also like",
-    "note": "Atif Aslam - the closest listener-overlap artist to Arijit Singh."
+    "note": "Atif Aslam - the closest listener-overlap artist to Arijit Singh.",
+    "youtube_id": "AlvUuGJccKs",
+    "youtube_url": "https://www.youtube.com/watch?v=AlvUuGJccKs"
   },
   {
     "title": "Pehli Nazar Mein",
@@ -77,6 +85,8 @@
     "country_store": "IN",
     "source": "itunes",
     "section": "You might also like",
-    "note": "Atif Aslam - the closest listener-overlap artist to Arijit Singh."
+    "note": "Atif Aslam - the closest listener-overlap artist to Arijit Singh.",
+    "youtube_id": "BadBAMnPX0I",
+    "youtube_url": "https://www.youtube.com/watch?v=BadBAMnPX0I"
   }
 ]

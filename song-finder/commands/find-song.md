@@ -17,9 +17,10 @@ Follow the full workflow defined in the `song-search` skill. In brief:
 
 1. **Clarify the brief.** From "$ARGUMENTS" extract: seed singers (primary),
    mood/occasion, language(s) (hard filter), genre, era, song count (default 15),
-   discovery appetite (similar-artist tracks ≤ ⅓ by default), clean-only, and any
-   must-include/exclude songs. Ask **one** concise round of questions only if you
-   have neither a singer nor a mood/language; otherwise state your assumptions.
+   discovery appetite (similar-artist tracks ≤ ⅓ by default), clean-only, any
+   must-include/exclude songs, and their **queue preference** (YouTube / YouTube
+   Music / Spotify / Apple Music). Ask **one** concise round of questions only if
+   you have neither a singer nor a mood/language; otherwise state your assumptions.
 
 2. **Pick the storefront** by language (`--country IN` for Hindi/Punjabi/Tamil…,
    `KR` for Korean, `US`/`GB` for English — table in the skill).
@@ -44,7 +45,21 @@ Follow the full workflow defined in the `song-search` skill. In brief:
    `section` ("From your singers" / "Mood matches" / "You might also like") and a
    one-line `note` saying why it fits *this* brief.
 
-5. **Present.** A table per section (song · artist · year · genre · duration ·
+5. **Queue it** (per the user's service preference, before the final render):
+   ```bash
+   # YouTube / YT Music: one-click watch_videos queue; --save enables the
+   # "Play all" button and direct video links in the playlist HTML
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/queue.py" --input songs.json \
+     --service youtube --save songs.json
+
+   # Spotify / Apple Music: no key-less queue API - export the tracklist and
+   # relay the printed TuneMyMusic/Soundiiz one-paste import steps
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/queue.py" --input songs.json --service spotify
+   ```
+   Spot-check a couple of resolved videos (top result can be a cover) and fix any
+   miss by editing that song's `youtube_id`.
+
+6. **Present.** A table per section (song · artist · year · genre · duration ·
    link), then the interactive playlist:
    ```bash
    python "${CLAUDE_PLUGIN_ROOT}/scripts/playlist.py" --input songs.json \
@@ -58,3 +73,5 @@ Follow the full workflow defined in the `song-search` skill. In brief:
 - Similar-artist tracks stay **clearly separated** ("You might also like") and capped
   at ~⅓ unless the user wants more discovery.
 - Previews are 30-second clips; link YouTube/Spotify/JioSaavn equally for full songs.
+- **Queueing honesty** — only YouTube gets a true one-click queue; for Spotify/Apple
+  Music give the import flow, never claim something was "queued" in their account.

@@ -16,7 +16,7 @@ A personal [Claude Code](https://claude.com/claude-code) plugin marketplace.
 |---|---|
 | [**shoe-shopping-analyzer**](./shoe-shopping-analyzer) | Compare shoes across every available shopping site with deep filters — price/deals, brand/model, size/fit/width, activity, specs, reviews. Live web research + scraping + weighted ranking. |
 | [**pg-finder**](./pg-finder) | Find and rank PG (paying guest) accommodation in any city — maps-based 5 km search around your office/college (or the clustered midpoint for a group of 2–3), with gender, budget, AC/non-AC, sharing, food, and amenity filters. Free OSM geocoding + interactive map. |
-| [**song-finder**](./song-finder) | Find songs and build playlists from singers (primary), mood, language, genre, and era — plus similar-artist discoveries matched to your taste. Key-less iTunes catalog (verified metadata + 30-sec previews), MusicBrainz + ListenBrainz similarity, interactive HTML playlist. |
+| [**song-finder**](./song-finder) | Find songs and build playlists from singers (primary), mood, language, genre, and era — plus similar-artist discoveries matched to your taste. Key-less iTunes catalog (verified metadata + 30-sec previews), MusicBrainz + ListenBrainz similarity, interactive HTML playlist, and queueing: one-click YouTube queue / one-paste Spotify & Apple Music import. |
 
 Install one with:
 
@@ -48,7 +48,7 @@ Claude-Plugins/
     ├── .claude-plugin/plugin.json
     ├── commands/                 # /find-song, /similar-artists
     ├── skills/                   # song-search methodology
-    ├── scripts/                  # music.py, playlist.py (+ sample fixture)
+    ├── scripts/                  # music.py, playlist.py, queue.py (+ sample fixture)
     └── README.md
 ```
 

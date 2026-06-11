@@ -55,6 +55,10 @@ PAGE = """<!DOCTYPE html>
   .links a {{ color: #1db954; font-size: .8rem; text-decoration: none; border: 1px solid #2c4a35;
              padding: 2px 9px; border-radius: 999px; }}
   .links a:hover {{ background: #1db954; color: #121212; }}
+  .playall {{ display: inline-block; background: #1db954; color: #121212; font-weight: 600;
+             font-size: .9rem; text-decoration: none; padding: 8px 18px; border-radius: 999px;
+             margin-bottom: 24px; }}
+  .playall:hover {{ background: #34d56b; }}
   footer {{ color: #666; font-size: .78rem; margin-top: 36px; }}
 </style>
 </head>
@@ -62,7 +66,7 @@ PAGE = """<!DOCTYPE html>
 <div class="wrap">
   <h1>{title}</h1>
   <div class="meta">{count} songs{duration} &middot; previews are 30-second clips &middot; built by song-finder</div>
-{sections}
+{play_all}{sections}
   <footer>Metadata from the iTunes catalog; availability and previews vary by country storefront.
   Use the links to play the full song on your service of choice.</footer>
 </div>
@@ -80,7 +84,9 @@ def search_links(song):
     links = []
     if song.get("link"):
         links.append(("iTunes", song["link"]))
-    links.append(("YouTube", f"https://www.youtube.com/results?search_query={q}"))
+    # direct video link when queue.py has resolved it; search fallback otherwise
+    links.append(("YouTube", song.get("youtube_url")
+                  or f"https://www.youtube.com/results?search_query={q}"))
     links.append(("Spotify", f"https://open.spotify.com/search/{q}"))
     links.append(("JioSaavn", f"https://www.jiosaavn.com/search/{q}"))
     return "".join(f'<a href="{esc(url)}" target="_blank" rel="noopener">{name}</a>'
@@ -129,8 +135,16 @@ def render(songs, title):
     total = sum(s.get("duration_s") or 0 for s in songs)
     duration = f" &middot; {total // 3600}h {total % 3600 // 60}m" if total >= 3600 else (
         f" &middot; {total // 60} min" if total else "")
+
+    # one-click queue when queue.py has resolved the videos (watch_videos caps ~50)
+    ids = [s["youtube_id"] for s in songs if s.get("youtube_id")][:50]
+    play_all = ""
+    if ids:
+        url = "https://www.youtube.com/watch_videos?video_ids=" + ",".join(ids)
+        play_all = (f'  <a class="playall" href="{esc(url)}" target="_blank" '
+                    f'rel="noopener">&#9654; Play all on YouTube ({len(ids)})</a>\n')
     return PAGE.format(title=esc(title), count=len(songs), duration=duration,
-                       sections="\n".join(blocks))
+                       play_all=play_all, sections="\n".join(blocks))
 
 
 def main():

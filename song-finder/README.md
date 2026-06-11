@@ -19,8 +19,9 @@ in the catalog never makes the playlist.**
 | Command | `/song-finder:similar-artists <singers>` | Just the taste map: who else you'd like, ranked by listener overlap, with a signature track each. |
 | Skill | `song-search` | Auto-triggers in normal conversation about songs/playlists/music; holds the full methodology. |
 | Script | `scripts/music.py` | `search`: catalog search with genre/year/clean filters. `top`: an artist's popular originals (remixes auto-dropped). `similar`: MusicBrainz + ListenBrainz similar artists. Zero dependencies, no API keys. |
-| Script | `scripts/playlist.py` | Self-contained **HTML playlist**: cover art, 30-sec audio previews, per-song YouTube/Spotify/JioSaavn links, sections + "why this song" notes. |
-| Fixture | `scripts/sample-songs.json` | Real catalog records (demo curation) to try the playlist renderer offline. |
+| Script | `scripts/playlist.py` | Self-contained **HTML playlist**: cover art, 30-sec audio previews, per-song YouTube/Spotify/JioSaavn links, sections + "why this song" notes, and a **▶ Play all on YouTube** button once videos are resolved. |
+| Script | `scripts/queue.py` | **Queue the list on your service**: YouTube/YT Music get a true one-click `watch_videos` queue (top video per song, throttled scrape, ids saved back into the JSON); Spotify/Apple Music get an `Artist - Title` tracklist + the one-paste TuneMyMusic/Soundiiz import flow (their queue APIs are OAuth-only). |
+| Fixture | `scripts/sample-songs.json` | Real catalog records (demo curation, video ids pre-resolved) to try the playlist renderer offline. |
 
 ## Install
 
@@ -50,7 +51,8 @@ some surprises welcome" — and the `song-search` skill activates on its own.
 2. **Storefront** — the iTunes country is picked by language (`IN` for Hindi/Punjabi/Tamil…, `KR` for K-pop, `US`/`GB` for English) so the right catalog surfaces.
 3. **Gather** — three sources merge into one deduped pool: each seed singer's popular originals (`music.py top`, remixes dropped), mood research via WebSearch with **every candidate verified** through `music.py search`, and similar-artist signature tracks (`music.py similar`, capped at ~⅓ of the list).
 4. **Curate** — language is hard, mood fit first, your singers anchor the list, originals over remixes, variety across albums/years. Each pick gets a section and a one-line "why it fits" note.
-5. **Present** — a table per section plus an interactive playlist page: cover art, 30-second previews, and YouTube/Spotify/JioSaavn links for the full songs.
+5. **Queue** — per your preference: YouTube/YT Music get a real one-click queue link (`queue.py` resolves each song's top video and chains them via `watch_videos`); Spotify/Apple Music get a tracklist that imports as a playlist in one paste via TuneMyMusic/Soundiiz.
+6. **Present** — a table per section plus an interactive playlist page: cover art, 30-second previews, a Play-all-on-YouTube button, and YouTube/Spotify/JioSaavn links for the full songs.
 
 ### Using the scripts directly
 
@@ -67,6 +69,12 @@ python scripts/music.py similar --artist "Arijit Singh" --limit 8 --with-top 2 -
 # Render the playlist page (try it now with the bundled sample data)
 python scripts/playlist.py --input scripts/sample-songs.json --title "Demo playlist" --open
 
+# Queue it: one-click YouTube playlist (saves video ids back for the Play-all button)
+python scripts/queue.py --input songs.json --service youtube --save songs.json --open
+
+# Or get the Spotify / Apple Music import flow (no OAuth, one paste via TuneMyMusic)
+python scripts/queue.py --input songs.json --service spotify
+
 # Or pipe straight through
 python scripts/music.py top --artist "Diljit Dosanjh" --country IN --json | \
   python scripts/playlist.py --title "Top Diljit"
@@ -79,7 +87,8 @@ python scripts/music.py top --artist "Diljit Dosanjh" --country IN --json | \
 - **Mood labels are judgment calls** — the plugin says so and offers swaps; language, by contrast, is a hard filter.
 - **Similarity data reflects ListenBrainz listeners** — it can skew Western for regional artists; results are sanity-checked before presenting, and the similarity-dataset name pinned in `music.py` may need a refresh if the endpoint changes snapshots.
 - **Storefront ≠ global availability** — metadata and previews vary by country; a missing preview doesn't mean a song doesn't exist.
-- **Polite APIs** — MusicBrainz calls are throttled to its 1 request/sec policy.
+- **Queueing honesty** — only YouTube supports a key-less one-click queue (`watch_videos`, ~50-song cap, anonymous temp playlist). Spotify and Apple Music require OAuth for queue/playlist APIs, so the plugin gives you the one-paste import flow instead of pretending. Resolved videos are the top search hit — occasionally a cover; the workflow spot-checks and any miss is fixable by editing that song's `youtube_id`.
+- **Polite APIs** — MusicBrainz and YouTube-search calls are throttled to ~1 request/sec.
 
 ## License
 

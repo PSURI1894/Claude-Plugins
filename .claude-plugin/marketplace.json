@@ -35,8 +35,8 @@
     {
       "name": "song-finder",
       "source": "./song-finder",
-      "description": "Find songs and build playlists from singers (primary), mood, language, genre, and era — plus similar-artist discoveries matched to your taste. Every track verified against the key-less iTunes catalog (real metadata + 30-sec previews); similar artists from MusicBrainz + ListenBrainz listener data; output as an interactive HTML playlist with YouTube/Spotify/JioSaavn links.",
-      "version": "1.0.0",
+      "description": "Find songs and build playlists from singers (primary), mood, language, genre, and era — plus similar-artist discoveries matched to your taste. Every track verified against the key-less iTunes catalog (real metadata + 30-sec previews); similar artists from MusicBrainz + ListenBrainz listener data; output as an interactive HTML playlist, queueable on your service: one-click YouTube/YT Music queue, one-paste Spotify/Apple Music import.",
+      "version": "1.1.0",
       "author": { "name": "Parth Suri" },
       "homepage": "https://github.com/PSURI1894",
       "license": "MIT",

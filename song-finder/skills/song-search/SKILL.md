@@ -33,6 +33,7 @@ Extract these fields (ask **one** concise round of questions only if you have
 | Discovery appetite | "only my singers" ↔ "surprise me" | Similar-artist tracks capped at **~⅓** of the list by default |
 | Clean-only | family setting, kids in the car | Becomes `--clean` |
 | Include / exclude | "must have Tum Hi Ho", "no remixes" | Honor exactly; remixes are excluded by default |
+| Queue preference | YouTube, YouTube Music, Spotify, Apple Music | Drives Step 6 — where the finished list gets queued |
 
 Echo the brief back in one line before researching, so the user can correct it.
 
@@ -137,6 +138,35 @@ anything the user asked for that couldn't be verified in the catalog.
 
 ---
 
+## Step 6 — Queue it where they listen
+Honor the user's queue preference (ask only if they mentioned wanting to play it
+and gave no service):
+
+**YouTube / YouTube Music** — a true one-click queue. Resolve each song to its
+top video and chain them into an anonymous `watch_videos` playlist:
+
+```bash
+python "${CLAUDE_PLUGIN_ROOT}/scripts/queue.py" --input songs.json \
+  --service youtube --save songs.json --open
+```
+
+`--save` writes the resolved video ids back, so re-rendering `playlist.py`
+afterwards adds a **▶ Play all on YouTube** button and direct per-song video
+links. Run queue.py **before** the final playlist render when the user wants
+YouTube. For `--service ytmusic` it also prints a music.youtube.com variant
+(best-effort; the YouTube link is the verified one).
+
+**Spotify / Apple Music** — there is **no key-less queue API** (both need OAuth),
+so don't pretend: `--service spotify|applemusic` exports an `Artist - Title`
+tracklist and prints the 3-step TuneMyMusic/Soundiiz import flow that creates
+the playlist in their account in one paste. Per-song Spotify/iTunes links are
+already in the playlist HTML.
+
+Spot-check 2–3 resolved videos against what you know (top search result is
+occasionally a cover or shorts clip) and swap any miss by editing `youtube_id`.
+
+---
+
 ## Guardrails
 - **Never invent songs** — every recommendation must come from a `music.py` hit
   or a citable web source. Never attribute a song to the wrong singer.
@@ -149,7 +179,9 @@ anything the user asked for that couldn't be verified in the catalog.
   country; a missing preview doesn't mean the song doesn't exist.
 - **ListenBrainz similarity reflects its listeners** — it can skew Western/scrobbler
   demographics; sanity-check suggestions against what you know before presenting.
-- **Respect MusicBrainz** — the script throttles to its 1 request/sec policy;
+- **Respect MusicBrainz and YouTube** — the scripts throttle to ~1 request/sec;
   don't loop beyond what's needed.
+- **Queueing honesty** — only YouTube gets a true one-click queue; Spotify and
+  Apple Music get the import flow, never a fake "queued for you" claim.
 - **Stay neutral** — link YouTube, Spotify, and JioSaavn equally; no platform
   favoritism.
