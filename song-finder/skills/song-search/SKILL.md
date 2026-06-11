@@ -120,10 +120,19 @@ Then annotate each pick in the JSON:
 ---
 
 ## Step 5 — Present
-Lead with a compact table per section:
+**One GitHub-flavored markdown table per section** — this format is mandatory.
+Never unroll songs into a card/list layout, and never print a bare URL (long
+URLs wrap and destroy the layout); every link is a markdown link on the title.
 
-| # | Song | Artist | Year | Genre | ⏱ | Listen |
-|---|------|--------|------|-------|---|--------|
+| # | Song | Artist | Year | ⏱ | Why it fits |
+|---|------|--------|------|---|-------------|
+| 1 | [Proper Patola](https://www.youtube.com/watch?v=...) | Diljit Dosanjh & Badshah | 2013 | 2:31 | OG party anthem — instant floor-starter |
+
+- **Song** = the title as a markdown link: the resolved `youtube_url` when
+  queue.py has run, else the catalog `link`.
+- **Why it fits** ≤ 10 words (it shares a row — keep it tight; genre goes here
+  only when it says something the section heading doesn't).
+- Section heading above each table: `### From your singers — <name> (N)` etc.
 
 Then render the interactive playlist (cover art, 30-sec previews, YouTube /
 Spotify / JioSaavn links per song):

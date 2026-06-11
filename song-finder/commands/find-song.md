@@ -59,8 +59,14 @@ Follow the full workflow defined in the `song-search` skill. In brief:
    Spot-check a couple of resolved videos (top result can be a cover) and fix any
    miss by editing that song's `youtube_id`.
 
-6. **Present.** A table per section (song · artist · year · genre · duration ·
-   link), then the interactive playlist:
+6. **Present.** One **markdown table per section** — mandatory format, never a
+   card/list layout, never bare URLs (titles are markdown links to the resolved
+   `youtube_url` or catalog `link`):
+
+   | # | Song | Artist | Year | ⏱ | Why it fits |
+   |---|------|--------|------|---|-------------|
+
+   Keep "Why it fits" under 10 words. Then the interactive playlist:
    ```bash
    python "${CLAUDE_PLUGIN_ROOT}/scripts/playlist.py" --input songs.json \
      --title "<playlist name>" --output playlist.html --open

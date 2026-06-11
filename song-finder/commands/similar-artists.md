@@ -27,9 +27,10 @@ Seed singers: **$ARGUMENTS**
 3. **Sanity-check** the results against what you know — listener data can skew
    Western; drop anything that's plainly a bad fit and say you did.
 
-4. **Present per seed:** a table — similar artist · similarity score · signature
-   track (year) · one-line "why you'd like them" grounded in actual style overlap
-   (era, language, vocal style, film vs indie).
+4. **Present per seed:** one **markdown table** (mandatory — never a card/list
+   layout, never bare URLs): similar artist · similarity score · signature
+   track (year) · one-line "why you'd like them" grounded in actual style
+   overlap (era, language, vocal style, film vs indie).
 
 5. **If 2–3 seeds were given,** call out artists that appear in *multiple*
    neighborhoods first — those are the strongest taste matches.
